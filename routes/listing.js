@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
-const Listing = require("../models/listing.js"); // Capital 'M' for Models
+const Listing = require("../Models/listing.js"); // Capital 'M' for Models
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
