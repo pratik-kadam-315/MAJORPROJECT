@@ -1,4 +1,4 @@
-const Listing = require("../models/listing");
+const Listing = require("../Models/listing");
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
@@ -49,16 +49,16 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error", "Listing you requested for does not exist !");
     return res.redirect("/listings");
   }
-  let originalImgUrl=listing.image.url;
- originalImgUrl= originalImgUrl.replace("/upload","/upload/w_250")
-  res.render("listings/edit.ejs", { listing,originalImgUrl});
+  let originalImgUrl = listing.image.url;
+  originalImgUrl = originalImgUrl.replace("/upload", "/upload/w_250");
+  res.render("listings/edit.ejs", { listing, originalImgUrl });
 };
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
   let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
 
-  if(typeof req.file !=="undefined") {
+  if (typeof req.file !== "undefined") {
     let url = req.file.path;
     let filename = req.file.filename;
     listing.image = { url, filename };
